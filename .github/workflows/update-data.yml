@@ -1,0 +1,45 @@
+name: Update Data JSON
+
+on:
+  schedule:
+    - cron: '0 * * * *' # हर घंटे चलेगा
+  workflow_dispatch: # मैन्युअल ट्रिगर के लिए
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install @supabase/supabase-js
+
+      - name: Fetch data from Supabase
+        run: |
+          node -e '
+            const { createClient } = require("@supabase/supabase-js");
+            const supabase = createClient("${{ secrets.SUPABASE_URL }}", "${{ secrets.SUPABASE_SERVICE_KEY }}");
+            async function fetchData() {
+              const { data, error } = await supabase.from("products").select("*");
+              if (error) throw error;
+              const jsonContent = JSON.stringify({ products: data }, null, 2);
+              require("fs").writeFileSync("data.json", jsonContent);
+            }
+            fetchData();
+          '
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions"
+          git config user.email "action@github.com"
+          git add data.json
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update data.json from Supabase"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
