@@ -1,0 +1,6 @@
+{
+    "products": [
+        { "no": 1, "category": "stones", "serial": "101", "name": "Lakhared", "size": "40x110", "minPrice": "80Rs. Sq.ft.", "price": "100", "photo": "--", "details": "kitchen use", "stock": 10 },
+        { "no": 2, "category": "stones", "serial": "102", "name": "parl black", "size": "30x100", "minPrice": "75Rs. Sq.ft.", "price": "110", "photo": "--", "details": "hall use", "stock": 15 }
+    ]
+}
