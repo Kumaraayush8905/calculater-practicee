@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Products</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Shree Salasar Traders</h1>
+    <input type="text" id="searchInput" placeholder="Search by Product Name, Serial, Category, or Size">
+
+    <table id="productTable">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Category</th>
+                <th>Serial Number</th>
+                <th>Product Name</th>
+                <th>Size</th>
+                <th>Minimum Price</th>
+                <th>Price</th>
+                <th>Photo</th>
+                <th>Details</th>
+                <th>Stock</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <details id="details">
+        <summary id="summary">Add New Product</summary>
+        <form id="addProductForm">
+            <input type="number" id="insertAt" placeholder="Insert at No. (Optional)">
+            <input type="text" id="category" placeholder="Category" required>
+            <input type="text" id="serial" placeholder="Serial Number" required>
+            <input type="text" id="name" placeholder="Product Name" required>
+            <input type="text" id="size" placeholder="Size">
+            <input type="text" id="minPrice" placeholder="Minimum Price">
+            <input type="text" id="price" placeholder="Price" required>
+            <input type="number" id="stock" placeholder="Stock" required>
+            <div id="photoSection"> Insert Photo by:
+                <button type="button" id="cameraBtn">camera</button>
+                <button type="button" id="galleryBtn">gallery</button>
+                <input type="file" id="photoInput" accept="image/*" style="display:none;">
+                <div id="photoPreview" style="display:none;"></div>
+                <button type="button" id="cancelPhoto" style="display:none;">Cancel</button>
+                <button type="button" id="uploadPhoto" style="display:none;">Upload</button>
+            </div>
+            <input type="text" id="details" placeholder="Details">
+            <button type="submit">Add Product</button>
+        </form>
+    </details>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Edit Product</h2>
+            <form id="editProductForm">
+                <input type="hidden" id="editIndex">
+                <input type="text" id="editCategory" placeholder="Category" required>
+                <input type="text" id="editSerial" placeholder="Serial Number" required>
+                <input type="text" id="editName" placeholder="Product Name" required>
+                <input type="text" id="editSize" placeholder="Size">
+                <input type="text" id="editMinPrice" placeholder="Minimum Price">
+                <input type="text" id="editPrice" placeholder="Price" required>
+                <input type="number" id="editStock" placeholder="Stock" required>
+                <div id="editPhotoSection">
+                    <button type="button" id="editCameraBtn">Photo insert by camera</button>
+                    <button type="button" id="editGalleryBtn">Photo browse from gallery</button>
+                    <input type="file" id="editPhotoInput" accept="image/*" style="display:none;">
+                    <div id="editPhotoPreview" style="display:none;"></div>
+                    <button type="button" id="editCancelPhoto" style="display:none;">Cancel</button>
+                    <button type="button" id="editUploadPhoto" style="display:none;">Upload</button>
+                    <button type="button" id="removePhoto" style="display:none;">Remove Photo</button>
+                </div>
+                <input type="text" id="editDetails" placeholder="Details">
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="photoModal" class="modal">
+        <div class="modal-content">
+            <span class="photo-close">×</span>
+            <div id="photoView"></div>
+        </div>
+    </div>
+
+    <div id="notification" style="display:none; position:fixed; top:10px; right:10px; color:white; padding:10px; border-radius:5px;"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
